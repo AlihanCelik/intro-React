@@ -19,24 +19,21 @@ export default class CategoryList extends Component {
             fetch("http://localhost:3000/categories").then(response=>response.json())
             .then(data=>this.setState({categories:data}));
         }
-    chanceCatgeory=(category)=>{
-        this.setState({currentCategory:category.categoryName})
-    }
+    
   render() {
     return (
         <div>
             <h2>{this.props.title}</h2>
-            <h3>{this.state.counter}</h3>
             <ListGroup>
                 {
                     this.state.categories.map(category=>(
-                        <ListGroupItem onClick={()=>this.chanceCatgeory(category)}
+                        <ListGroupItem onClick={()=>this.props.changeCategory(category)}
                         key={category.categoryId}>{category.categoryName}</ListGroupItem>
                     ))
                 }
                 
             </ListGroup>
-            <h4>{this.state.currentCategory}</h4>
+            <h4>{this.props.currentCategory}</h4>
         </div>
     
     )
