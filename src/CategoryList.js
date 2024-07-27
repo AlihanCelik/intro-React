@@ -4,14 +4,21 @@ import { ListGroup, ListGroupItem } from 'reactstrap';
 export default class CategoryList extends Component {
     constructor(props){
          super(props);
-         this.state={categories:[{categoryId:1,categoryName:"Beverages"},
-            {categoryId:1,categoryName:"Condiments"}
-           
-         ], 
-         currentCategory:""
-        }
+         this.state={
+            categories:[]
+        };
+        
+        
          
     }
+    componentDidMount(){
+            this.getCategories();
+        }
+         
+        getCategories= ()=>{
+            fetch("http://localhost:3000/categories").then(response=>response.json())
+            .then(data=>this.setState({categories:data}));
+        }
     chanceCatgeory=(category)=>{
         this.setState({currentCategory:category.categoryName})
     }
